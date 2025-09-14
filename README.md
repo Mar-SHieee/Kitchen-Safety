@@ -4,7 +4,7 @@
 - **Threshold Checking**: Compares readings against safety thresholds and determines status.
 - **Actuator Control**: Automatically triggers LED, buzzer, and servo based on danger conditions.
 - **LCD Updates**: Displays current sensor readings and system status with rotating information.
-- **Cloud Communication**: #Sends 🍳 Smart Kitchen Safety - IoT Solution for Modern Homes
+- **Cloud Communication**: **Sends 🍳 Smart Kitchen Safety - IoT Solution for Modern Homes
 
 > **Transforming Kitchen Safety Through Smart Technology**
 
