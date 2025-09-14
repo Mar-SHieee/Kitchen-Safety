@@ -1,0 +1,42 @@
+name: kitchen_safety
+
+description: "A Flutter app for kitchen safety monitoring."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.5.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  supabase_flutter: ^2.9.1
+  mqtt_client: ^10.2.0
+  flutter_local_notifications: ^18.0.0
+  permission_handler: ^11.3.1
+  audioplayers: ^6.1.0
+  material_symbols_icons: ^4.2719.0
+  intl: ^0.18.0 # Added for DateFormat
+  vibration: ^2.0.0
+  shared_preferences: ^2.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  integration_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/fonts/
+    - assets/sounds/
+    - assets/images/spalsh_background.jpg 
+
+  fonts:
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/OpenSans-VariableFont_wdth,wght.ttf
