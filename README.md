@@ -503,7 +503,7 @@ const char* supabase_key = "your_supabase_anon_key";
 ### 🛠️ Development Resources
 - **Team Worksheet**: Project timeline, task allocation, and development milestones
 - **Code Repository**: Complete source code with detailed comments and documentation
-- **Wokwi Simulation**: [Online circuit simulation] for testing hardware without physical components
+- **Wokwi Simulation**: Online circuit simulation for testing hardware without physical components
 - **Kitchen Maquette**: Physical prototype demonstration showing real-world application
 
 ### 🔧 Setup & Configuration Guides
