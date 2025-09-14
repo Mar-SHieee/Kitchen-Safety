@@ -1,181 +1,156 @@
-#Smart Kitchen Safety
-Smart Kitchen Safety is an IoT-based solution designed to enhance kitchen safety by monitoring environmental conditions in real-time and mitigating risks through actuators. Developed during IoT training at the Faculty of Computing and Data Science, Alexandria University, this project is a collaborative effort by team members including Nada Ahmed and Nada Aseem. It integrates a Flutter mobile application with an ESP32 microcontroller, leveraging Supabase for authentication and data storage, MQTT for real-time communication, and local notifications for critical alerts.
-The system monitors gas (MQ2), flame (IR sensor), temperature, and humidity (DHT11), triggering a buzzer, red LED, and servo motor (to open a door) when safety thresholds are exceeded. Data is displayed on both the mobile app and an ESP32-connected 16x2 LCD, ensuring prompt alerts for hazards like gas leaks or fires.
-Table of Contents
+# Smart Kitchen Safety
 
-#Features
-Contribution to SDGs
-System Architecture
-Supabase Database Structure
-UX Flow Design
-Thresholds
-File Structure
-Setup Instructions
-Flutter App
-ESP32 Firmware
-Security Considerations
-Future Improvements
-Technologies Used
-Demo & Resources
-Contributing
-License
+**Smart Kitchen Safety** is an IoT-based solution designed to enhance kitchen safety by monitoring environmental conditions in real-time and mitigating risks through actuators. Developed during IoT training at the Faculty of Computing and Data Science, Alexandria University, by team members, it integrates a Flutter mobile app with an ESP32 microcontroller, leveraging **Supabase**, **MQTT**, and local notifications.
 
-#Features
+---
 
-Secure Authentication: User signup/login with email, password, and username via Supabase (auth_service.dart, auth_screen.dart).
-Real-time Monitoring: Displays live sensor readings (gas, flame, temperature, humidity) with status updates (Safe, Warning, Danger) on the app (live_status_screen.dart, view_sensors_page.dart) and ESP32 LCD (KitchenSafetyESP.ino).
-Sensor Management: Add/delete up to 4 sensors (add_sensor_page.dart, delete_sensor_page.dart).
-Customizable Alerts: Enable notifications (with/without vibration) and control actuators (LED, buzzer, servo) via MQTT (alerts_page.dart).
-Local Notifications: Triggers alerts with vibration and sound for danger conditions (notification_service.dart).
-Historical Logs: View sensor data history with timestamps and statuses (sensor_logs_screen.dart).
-Responsive UI: Modern design with animations (pulse, fade, slide) and consistent themes (app_theme.dart, app_models.dart).
-ESP32 Integration: Collects sensor data, controls actuators, and displays status on a 16x2 LCD (KitchenSafetyESP.ino).
+## Table of Contents
 
-Contribution to SDGs
-This project aligns with the United Nations Sustainable Development Goals:
+1. [Features](#features)  
+2. [Contribution to SDGs](#contribution-to-sdgs)  
+3. [System Architecture](#system-architecture)  
+4. [Supabase Database Structure](#supabase-database-structure)  
+5. [UX Flow Design](#ux-flow-design)  
+6. [Thresholds](#thresholds)  
+7. [File Structure](#file-structure)  
+8. [Setup Instructions](#setup-instructions)  
+9. [ESP32 Firmware](#esp32-firmware)  
+10. [Security Considerations](#security-considerations)  
+11. [Future Improvements](#future-improvements)  
+12. [Technologies Used](#technologies-used)  
+13. [Demo & Resources](#demo--resources)  
+14. [Contributing](#contributing)  
+15. [License](#license)  
 
-SDG 3: Good Health and Well-Being: Prevents health hazards like gas poisoning, burns, or respiratory issues by detecting gas leaks, fires, and overheating.
-SDG 11: Sustainable Cities and Communities: Enhances home safety, contributing to safer and more resilient urban environments.
-SDG 9: Industry, Innovation, and Infrastructure: Advances smart home technology through innovative IoT integration using Flutter, Supabase, and MQTT.
+---
 
-System Architecture
+## Features
 
-Frontend: Built with Flutter, using StatefulWidget for dynamic UI updates and Provider/setState for state management.
-Backend:
-Supabase: Manages authentication, data storage (profiles, user_sensors, sensors, user_alerts), and real-time subscriptions (supabase_service.dart).
-MQTT: Enables real-time communication with IoT devices via a Singleton pattern (mqtt_service.dart) and ESP32 (KitchenSafetyESP.ino).
-Local Notifications: Supports multiple channels (danger, warning, info) with vibration and sound (notification_service.dart).
+- **Secure Authentication**: User signup/login with email, password, and username via Supabase (`auth_service.dart`, `auth_screen.dart`).  
+- **Real-time Monitoring**: Displays live sensor readings (gas, flame, temperature, humidity) with status updates (`Safe`, `Warning`, `Danger`) on the app (`live_status_screen.dart`, `view_sensors_page.dart`) and ESP32 LCD (`KitchenSafetyESP.ino`).  
+- **Sensor Management**: Add/delete up to 4 sensors (`add_sensor_page.dart`, `delete_sensor_page.dart`).  
+- **Customizable Alerts**: Enable notifications (with/without vibration) and control actuators (LED, buzzer, servo) via MQTT (`alerts_page.dart`).  
+- **Local Notifications**: Triggers alerts with vibration and sound for danger conditions (`notification_service.dart`).  
+- **Historical Logs**: View sensor data history with timestamps and statuses (`sensor_logs_screen.dart`).  
+- **Responsive UI**: Modern design with animations (pulse, fade, slide) and consistent themes (`app_theme.dart`, `app_models.dart`).  
+- **ESP32 Integration**: Collects sensor data, controls actuators, and displays status on a 16x2 LCD (`KitchenSafetyESP.ino`).  
 
+---
 
-Embedded System: ESP32 collects data from MQ2, DHT11, and IR flame sensors, controls LED, buzzer, and servo, and communicates with Supabase and MQTT (KitchenSafetyESP.ino).
-Data Models: Defined in app_models.dart (e.g., SensorType, SensorStatus, SystemStatus, Sensor, SensorLog, AlertSettings).
+## Contribution to SDGs
 
-Supabase Database Structure
+- **SDG 3: Good Health and Well-Being**: Prevents health hazards like gas poisoning, burns, or respiratory issues.  
+- **SDG 11: Sustainable Cities and Communities**: Enhances home safety for safer urban environments.  
+- **SDG 9: Industry, Innovation, and Infrastructure**: Advances smart home technology via IoT integration.  
 
-profiles:
-id (uuid): Links to the auth table.
-created_at (timestamp): Record creation time.
-username (text): User’s display name.
-active (bool): Indicates account status.
+---
 
+## System Architecture
 
-sensors:
-id (uuid): Unique sensor record ID.
-user_id (uuid): Links to the user.
-gas (numeric): Gas sensor value.
-flame (numeric): Flame sensor value.
-temp (numeric): Temperature value.
-hum (numeric): Humidity value.
-led (int8): LED state (0 or 1).
-buzzer (int8): Buzzer state (0 or 1).
-servo (int8): Servo angle (0 or 180).
-status (text): System status (e.g., "All Safe", "DANGER - Door Open").
+- **Frontend (Flutter)**: StatefulWidgets for dynamic UI; Provider/setState for state management.  
+- **Backend (Supabase)**: Authentication, data storage, real-time subscriptions (`supabase_service.dart`).  
+- **MQTT**: Real-time IoT communication via Singleton pattern (`mqtt_service.dart`) and ESP32 (`KitchenSafetyESP.ino`).  
+- **Local Notifications**: Multiple channels (danger, warning, info) with vibration and sound (`notification_service.dart`).  
+- **Embedded System (ESP32)**: Collects sensor data, controls LED, buzzer, and servo, displays on LCD, communicates with Supabase/MQTT.  
+- **Data Models**: Defined in `app_models.dart` (e.g., SensorType, SensorStatus, SystemStatus, Sensor, SensorLog, AlertSettings).  
 
+---
 
-user_alerts:
-id (uuid): Unique alert ID.
-user_id (uuid): Links to the user.
-created_at (timestamp): Alert creation time.
-sensor_type (text): Sensor type (gas, flame, temp, hum).
-alert_type (text): Notification type (e.g., "notification", "notification with vibration").
+## Supabase Database Structure
 
+### `profiles`
 
-user_sensors:
-id (uuid): Unique sensor assignment ID.
-user_id (uuid): Links to the user.
-created_at (timestamp): Assignment creation time.
-sensor_type (text): Type of sensor assigned.
+| Column     | Type       | Description                     |
+|------------|------------|---------------------------------|
+| id         | uuid       | Links to auth table             |
+| created_at | timestamp  | Record creation time            |
+| username   | text       | User display name               |
+| active     | bool       | Account status                  |
 
+### `sensors`
 
+| Column   | Type     | Description                                    |
+|----------|----------|-----------------------------------------------|
+| id       | uuid     | Unique sensor ID                               |
+| user_id  | uuid     | Linked to user                                 |
+| gas      | numeric  | Gas sensor value                               |
+| flame    | numeric  | Flame sensor value                             |
+| temp     | numeric  | Temperature value                              |
+| hum      | numeric  | Humidity value                                 |
+| led      | int8     | LED state (0 or 1)                             |
+| buzzer   | int8     | Buzzer state (0 or 1)                          |
+| servo    | int8     | Servo angle (0 or 180)                         |
+| status   | text     | System status (e.g., "All Safe", "DANGER")    |
 
-UX Flow Design
-The Flutter app offers an intuitive and seamless user experience, ensuring effective interaction with the kitchen safety system.
-Splash Screen (splash_screen.dart)
+### `user_alerts`
 
-Displays "Smart Kitchen" with a kitchen-themed background for 2 seconds, then navigates to the authentication screen.
+| Column      | Type      | Description                              |
+|------------|-----------|------------------------------------------|
+| id         | uuid      | Unique alert ID                           |
+| user_id    | uuid      | Linked to user                            |
+| created_at | timestamp | Alert creation time                        |
+| sensor_type| text      | Sensor type (gas, flame, temp, hum)      |
+| alert_type | text      | Notification type (e.g., "notification with vibration") |
 
-Authentication Screen (auth_screen.dart, auth_service.dart)
+### `user_sensors`
 
-Sign Up: Users register with email, password, and username, updating the profiles table with username linked to the auth table via id.
-Sign In: Existing users log in with email and password.
-Redirects to the dashboard upon successful authentication.
+| Column      | Type      | Description                              |
+|------------|-----------|------------------------------------------|
+| id         | uuid      | Unique sensor assignment ID              |
+| user_id    | uuid      | Linked to user                            |
+| created_at | timestamp | Assignment creation time                  |
+| sensor_type| text      | Type of sensor assigned                   |
 
-Dashboard (dashboard.dart)
+---
 
-Banner: Displays real-time sensor readings (e.g., "T:25°C H:60% G:500 F:Safe S:Safe") from the MQTT topic sensors/data:{ "temp": value, "hum": value, "gas": value, "flame": value, "status": "text", "buzzer": 1 or 0, "servo": 180 or 0, "led": 1 or 0 }
+## UX Flow Design
 
+### Splash Screen
+- Displays "Smart Kitchen" with kitchen-themed background for 2 seconds, then navigates to authentication.
 
-Sensor Cards: Shows up to 4 sensors (gas, flame, temperature, humidity) based on user_sensors count, displaying name, value, and status.
-Dynamic Updates: Refreshes automatically when sensors are added/deleted, reflecting changes in user_sensors.
-Alert Indicator: Applies a red shadow to sensor cards during danger conditions (based on thresholds).
-Navigation Buttons:
-Add Sensor: Navigates to add_sensor_page.dart (max 4 sensors).
-Delete Sensor: Navigates to delete_sensor_page.dart.
-View Sensors: Navigates to view_sensors_page.dart.
-Alerts: Navigates to alerts_page.dart.
+### Authentication Screen
+- **Sign Up**: Register with email, password, username. Updates `profiles` table.  
+- **Sign In**: Existing users log in with email/password. Redirects to Dashboard.  
 
+### Dashboard
+- Banner shows real-time sensor readings via MQTT.  
+- Sensor Cards show up to 4 sensors (gas, flame, temp, hum).  
+- Red shadow applied to cards during danger conditions.  
+- Navigation Buttons: Add Sensor, Delete Sensor, View Sensors, Alerts.
 
+### View Sensors Page
+- Lists user-associated sensors.  
+- Highlights danger conditions with red shadow.  
 
-View Sensors Page (view_sensors_page.dart)
+### Live Status Screen
+- Shows real-time sensor data and MQTT connection status.  
+- Visual feedback: yellow for warning, red for danger.  
 
-Lists user-associated sensors from user_sensors, showing name, value, and username.
-Updates dynamically when sensors are added/deleted.
-Highlights danger conditions with a red shadow on sensor cards.
+### Sensor Logs Screen
+- Historical sensor data table.  
+- Banner reflects system status.  
 
-Live Status Screen (live_status_screen.dart)
+### Alerts Page
+- Notification management: enable/disable per sensor.  
+- Actuator control: LED, buzzer, servo via MQTT.  
+- Offline sensors have notifications disabled.
 
-Displays real-time sensor data and MQTT connection status ("Connected" or "Disconnected").
-Shows active sensors from user_sensors, updating dynamically.
-Visual Feedback:
-Warning: Yellow highlight when sensor values approach thresholds (e.g., temp nearing 40°C).
-Danger: Red highlight when thresholds are exceeded (e.g., gas > 2000).
+---
 
+## Thresholds
 
-Integrates with mqtt_service.dart and app_models.dart.
+| Sensor Type | Threshold Value | Action on Exceeding                  |
+|-------------|----------------|------------------------------------|
+| Gas (MQ2)   | >2000          | Buzzer, Red LED, Servo door open   |
+| Flame (IR)  | <1000          | Buzzer, Red LED, Servo door open   |
+| Temp (DHT11)| >40°C          | Buzzer, Red LED, Servo door open   |
+| Humidity    | >80%           | Monitored only                      |
 
-Sensor Logs Screen (sensor_logs_screen.dart)
+---
 
-Displays historical sensor data from the sensors table in a tabular format.
-Updates UI when sensors are added/deleted in user_sensors (without affecting the Supabase sensors table).
-Includes a banner showing system status, turning red during danger conditions.
+## File Structure
 
-Alerts Page (alerts_page.dart)
-
-Notification Management:
-Notifications are disabled by default and can be enabled per sensor.
-Options: "notification only" or "notification with vibration", stored in user_alerts.
-Danger conditions trigger notifications via notification_service.dart with vibration.
-
-
-Actuator Control:
-Controls servo (0°–180°), LED (on/off), and buzzer (on/off) via MQTT topics (led, servo, buzzer).
-Updates are reflected in sensors and user_alerts.
-
-
-Dynamic Behavior:
-Offline sensors (removed from user_sensors) have disabled notifications.
-Re-adding sensors re-enables notifications.
-
-
-Banner: Displays current sensor values and status, with red alerts for danger.
-
-Thresholds
-Thresholds are based on sensor characteristics and safety standards:
-
-Gas (MQ2): >2000, indicating a hazardous gas concentration (e.g., LPG, methane).
-Flame (IR): <1000, indicating flame detection based on low analog values.
-Temperature (DHT11): >40°C, indicating overheating risks in a kitchen.
-Humidity (DHT11): >80%, monitored but not directly triggering danger alerts.
-
-When any threshold is exceeded, the ESP32 triggers:
-
-Buzzer: Audible alarm.
-Red LED: Visual alert.
-Servo: Opens the door (180°) for evacuation and ventilation.
-
-File Structure
-
-Flutter App:
+### Flutter App
 main.dart: Initializes Supabase, MQTT, notifications, and app theme.
 splash_screen.dart: Displays a welcome screen with a kitchen background.
 auth_service.dart: Manages user authentication.
