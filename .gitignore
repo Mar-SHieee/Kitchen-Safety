@@ -23,4 +23,13 @@ ios/Flutter/Flutter.podspec
 # System files
 .DS_Store
 Thumbs.db
+# Flutter specific
+**/doc/api/
+**/ios/Flutter/.last_build_id
+/coverage/
+app.*.symbols
+app.*.map.json
+/android/app/debug
+/android/app/profile
+/android/app/release
 
