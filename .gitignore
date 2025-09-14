@@ -1,0 +1,26 @@
+# Ignore build files
+build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+*.iml
+*.log
+*.tmp
+*.swp
+*.zip
+*.apk
+*.aab
+
+# ESP32 / PlatformIO
+.pio/
+.vscode/
+
+# System files
+.DS_Store
+Thumbs.db
+
