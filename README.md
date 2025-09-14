@@ -1,9 +1,9 @@
-Smart Kitchen Safety
+#Smart Kitchen Safety
 Smart Kitchen Safety is an IoT-based solution designed to enhance kitchen safety by monitoring environmental conditions in real-time and mitigating risks through actuators. Developed during IoT training at the Faculty of Computing and Data Science, Alexandria University, this project is a collaborative effort by team members including Nada Ahmed and Nada Aseem. It integrates a Flutter mobile application with an ESP32 microcontroller, leveraging Supabase for authentication and data storage, MQTT for real-time communication, and local notifications for critical alerts.
 The system monitors gas (MQ2), flame (IR sensor), temperature, and humidity (DHT11), triggering a buzzer, red LED, and servo motor (to open a door) when safety thresholds are exceeded. Data is displayed on both the mobile app and an ESP32-connected 16x2 LCD, ensuring prompt alerts for hazards like gas leaks or fires.
 Table of Contents
 
-Features
+#Features
 Contribution to SDGs
 System Architecture
 Supabase Database Structure
@@ -13,8 +13,6 @@ File Structure
 Setup Instructions
 Flutter App
 ESP32 Firmware
-
-
 Security Considerations
 Future Improvements
 Technologies Used
@@ -22,7 +20,7 @@ Demo & Resources
 Contributing
 License
 
-Features
+#Features
 
 Secure Authentication: User signup/login with email, password, and username via Supabase (auth_service.dart, auth_screen.dart).
 Real-time Monitoring: Displays live sensor readings (gas, flame, temperature, humidity) with status updates (Safe, Warning, Danger) on the app (live_status_screen.dart, view_sensors_page.dart) and ESP32 LCD (KitchenSafetyESP.ino).
