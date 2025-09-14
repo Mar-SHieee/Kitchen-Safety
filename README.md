@@ -503,7 +503,7 @@ const char* supabase_key = "your_supabase_anon_key";
 ### 🛠️ Development Resources
 - **Team Worksheet**: Project timeline, task allocation, and development milestones
 - **Code Repository**: Complete source code with detailed comments and documentation
-- **Wokwi Simulation**: [Online circuit simulation](https://wokwi.com) for testing hardware without physical components
+- **Wokwi Simulation**: [Online circuit simulation] for testing hardware without physical components
 - **Kitchen Maquette**: Physical prototype demonstration showing real-world application
 
 ### 🔧 Setup & Configuration Guides
@@ -558,7 +558,7 @@ We welcome contributions from developers, researchers, and IoT enthusiasts! Here
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for complete details.
 
 **Copyright (c) 2024 Smart Kitchen Safety Team, Alexandria University**
-GitHub Repository: [Link to be added]
+GitHub Repository: [https://github.com/Mar-SHieee/Kitchen-Safety.git]
 
 Contributing
 Contributions are welcome! Please submit a pull request or open an issue for suggestions, bug reports, or feature requests.
